@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 
         public override RazorConfiguration Configuration => FallbackRazorConfiguration.MVC_2_1;
 
-        public override IReadOnlyList<RazorDocument> Documents => Array.Empty<RazorDocument>();
+        public override IReadOnlyList<DocumentSnapshot> Documents => Array.Empty<DocumentSnapshot>();
 
         public override string FilePath { get; }
 
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 
         public override Project WorkspaceProject => null;
 
-        public override RazorProjectEngine GetCurrentProjectEngine()
+        public override RazorProjectEngine GetProjectEngine()
         {
             return _projectEngine.Value;
         }

@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
@@ -10,18 +12,20 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
     {
         public abstract RazorConfiguration Configuration { get; }
 
-        public abstract IReadOnlyList<RazorDocument> Documents { get; }
+        public abstract IReadOnlyList<DocumentSnapshot> Documents { get; }
 
         public abstract string FilePath { get; }
 
         public abstract bool IsInitialized { get; }
 
-        public abstract IReadOnlyList<TagHelperDescriptor> TagHelpers { get; }
-
         public abstract VersionStamp Version { get; }
 
         public abstract Project WorkspaceProject { get; }
 
-        public abstract RazorProjectEngine GetCurrentProjectEngine();
+        public abstract RazorProjectEngine GetProjectEngine();
+
+        public abstract Task<IReadOnlyList<TagHelperDescriptor>> GetTagHelpersAsync();
+
+        public abstract bool TryGetTagHelpers(out IReadOnlyList<TagHelperDescriptor> results);
     }
 }

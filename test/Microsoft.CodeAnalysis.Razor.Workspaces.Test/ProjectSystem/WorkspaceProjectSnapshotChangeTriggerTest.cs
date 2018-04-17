@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             ProjectNumberTwo = SolutionWithTwoProjects.GetProject(projectId2);
             ProjectNumberThree = SolutionWithOneProject.GetProject(projectId3);
 
-            HostProjectOne = new HostProject("One.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<RazorDocument>());
-            HostProjectTwo = new HostProject("Two.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<RazorDocument>());
-            HostProjectThree = new HostProject("Three.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<RazorDocument>());
+            HostProjectOne = new HostProject("One.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<DocumentSnapshot>());
+            HostProjectTwo = new HostProject("Two.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<DocumentSnapshot>());
+            HostProjectThree = new HostProject("Three.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<DocumentSnapshot>());
         }
 
         private HostProject HostProjectOne { get; }

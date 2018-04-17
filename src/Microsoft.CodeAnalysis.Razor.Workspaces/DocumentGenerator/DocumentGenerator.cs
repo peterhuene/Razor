@@ -56,7 +56,7 @@ namespace Microsoft.CodeAnalysis.Razor
             _projects.Remove(project.FilePath);
         }
 
-        private void AddDocument(ProjectSnapshot project, RazorDocument document)
+        private void AddDocument(ProjectSnapshot project, DocumentSnapshot document)
         {
             var documentEntry = new DocumentEntry(project.FilePath, document.FilePath)
             {
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.Razor
             Enqueue(documentEntry);
         }
 
-        private void RemoveDocument(ProjectSnapshot project, RazorDocument document)
+        private void RemoveDocument(ProjectSnapshot project, DocumentSnapshot document)
         {
             var projectEntry = _projects[project.FilePath];
             var fileEntry = _files[document.FilePath];
@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Razor
             }
         }
 
-        private void SetDirty(ProjectSnapshot project, RazorDocument document)
+        private void SetDirty(ProjectSnapshot project, DocumentSnapshot document)
         {
             var documentEntry = _projects[project.FilePath].Documents[document.FilePath];
             documentEntry.KnownVersion = documentEntry.KnownVersion.GetNewerVersion();
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.Razor
 
                         var documentsByFilePath = e.Project.Documents.ToDictionary(d => d.FilePath, d => d);
 
-                        var removals = new List<RazorDocument>();
+                        var removals = new List<DocumentSnapshot>();
                         foreach (var kvp in projectEntry.Documents)
                         {
                             // Just process removals during this part, we will do additions + changes next.
@@ -277,7 +277,7 @@ namespace Microsoft.CodeAnalysis.Razor
 
             public bool Detached { get; set; }
 
-            public RazorDocument Document { get; set; }
+            public DocumentSnapshot Document { get; set; }
 
             public VersionStamp ComputedVersion { get; set; }
 

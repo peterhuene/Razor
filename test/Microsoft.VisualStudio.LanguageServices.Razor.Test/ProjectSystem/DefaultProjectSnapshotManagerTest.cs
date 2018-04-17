@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             HostProject = new HostProject(
                 "c:\\MyProject\\Test.csproj",
                 FallbackRazorConfiguration.MVC_2_0,
-                new RazorDocument[]
+                new DocumentSnapshot[]
                 {
                     new ProjectSystemRazorDocument("c:\\MyProject\\File.cshtml", "File.cshtml"),
                 });
@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             HostProjectWithConfigurationChange = new HostProject(
                 "c:\\MyProject\\Test.csproj",
                 FallbackRazorConfiguration.MVC_1_0,
-                new RazorDocument[]
+                new DocumentSnapshot[]
                 {
                     new ProjectSystemRazorDocument("c:\\MyProject\\File.cshtml", "File.cshtml"),
                 });
@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             HostProjectWithDocumentAdded = new HostProject(
                 "c:\\MyProject\\Test.csproj",
                 FallbackRazorConfiguration.MVC_2_0,
-                new RazorDocument[]
+                new DocumentSnapshot[]
                 {
                     new ProjectSystemRazorDocument("c:\\MyProject\\File.cshtml", "File.cshtml"),
                     new ProjectSystemRazorDocument("c:\\MyProject\\AddedFile.cshtml", "AddedFile.cshtml"),
@@ -217,14 +217,14 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             ProjectManager.Reset();
 
             var snapshot = ProjectManager.GetSnapshot(HostProject);
-            var projectEngine = snapshot.GetCurrentProjectEngine();
+            var projectEngine = snapshot.GetProjectEngine();
 
             // Act
             ProjectManager.HostProjectChanged(HostProjectWithConfigurationChange);
 
             // Assert
             snapshot = ProjectManager.GetSnapshot(HostProjectWithConfigurationChange);
-            Assert.NotSame(projectEngine, snapshot.GetCurrentProjectEngine());
+            Assert.NotSame(projectEngine, snapshot.GetProjectEngine());
         }
 
         [ForegroundFact]
@@ -261,7 +261,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             ProjectManager.Reset();
 
             var snapshot = ProjectManager.GetSnapshot(HostProject);
-            var projectEngine = snapshot.GetCurrentProjectEngine();
+            var projectEngine = snapshot.GetProjectEngine();
 
             // Act
             ProjectManager.HostProjectChanged(HostProjectWithDocumentAdded);
@@ -308,14 +308,14 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             ProjectManager.Reset();
 
             var snapshot = ProjectManager.GetSnapshot(HostProject);
-            var projectEngine = snapshot.GetCurrentProjectEngine();
+            var projectEngine = snapshot.GetProjectEngine();
 
             // Act
             ProjectManager.HostProjectChanged(HostProjectWithDocumentAdded);
 
             // Assert
             snapshot = ProjectManager.GetSnapshot(HostProjectWithDocumentAdded);
-            Assert.Same(projectEngine, snapshot.GetCurrentProjectEngine());
+            Assert.Same(projectEngine, snapshot.GetProjectEngine());
         }
 
         [ForegroundFact]
@@ -783,7 +783,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             ProjectManager.Reset();
 
             snapshot = ProjectManager.GetSnapshot(HostProject);
-            var tagHelpers = snapshot.GetCurrentProjectEngine()
+            var tagHelpers = snapshot.GetProjectEngine()
                 .EngineFeatures
                 .OfType<ITagHelperFeature>()
                 .Single()
@@ -814,7 +814,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             snapshot = ProjectManager.GetSnapshot(HostProject);
 
             // Should trigger the update of the project engine
-            tagHelpers = snapshot.GetCurrentProjectEngine()
+            tagHelpers = snapshot.GetProjectEngine()
                 .EngineFeatures
                 .OfType<ITagHelperFeature>()
                 .Single()

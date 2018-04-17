@@ -6,7 +6,7 @@ using System;
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 {
     [Flags]
-    public enum ProjectSnapshotStateDifference
+    internal enum ProjectDifference
     {
         None = 0,
         ConfigurationChanged = 1,

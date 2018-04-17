@@ -23,7 +23,7 @@ namespace Microsoft.VisualStudio.Editor.Razor
                 return Task.FromResult(TagHelperResolutionResult.Empty);
             }
             
-            return GetTagHelpersAsync(project, project.GetCurrentProjectEngine());
+            return GetTagHelpersAsync(project, project.GetProjectEngine());
         }
     }
 }

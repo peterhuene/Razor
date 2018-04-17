@@ -7,13 +7,13 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 {
     internal class ProjectChangeEventArgs : EventArgs
     {
-        public ProjectChangeEventArgs(ProjectSnapshot project, ProjectChangeKind kind)
+        public ProjectChangeEventArgs(string filePath, ProjectChangeKind kind)
         {
-            Project = project;
+            FilePath = filePath;
             Kind = kind;
         }
 
-        public ProjectSnapshot Project { get; }
+        public string FilePath { get; }
 
         public ProjectChangeKind Kind { get; }
     }

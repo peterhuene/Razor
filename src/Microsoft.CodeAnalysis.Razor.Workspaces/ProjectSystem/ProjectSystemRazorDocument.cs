@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 {
-    internal class ProjectSystemRazorDocument : RazorDocument
+    internal class ProjectSystemRazorDocument : DocumentSnapshot
     {
         public ProjectSystemRazorDocument(string filePath, string targetPath)
         {

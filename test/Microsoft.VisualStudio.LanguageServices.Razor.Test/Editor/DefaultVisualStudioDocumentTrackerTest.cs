@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor.Editor
             Workspace = TestWorkspace.Create();
             ProjectManager = new TestProjectSnapshotManager(Workspace);
 
-            HostProject = new HostProject(ProjectPath, FallbackRazorConfiguration.MVC_2_1, Array.Empty<RazorDocument>());
-            OtherHostProject = new HostProject(ProjectPath, FallbackRazorConfiguration.MVC_2_0, Array.Empty<RazorDocument>());
+            HostProject = new HostProject(ProjectPath, FallbackRazorConfiguration.MVC_2_1, Array.Empty<DocumentSnapshot>());
+            OtherHostProject = new HostProject(ProjectPath, FallbackRazorConfiguration.MVC_2_0, Array.Empty<DocumentSnapshot>());
 
             ProjectService = Mock.Of<TextBufferProjectService>(s =>
                 s.GetHostProject(It.IsAny<ITextBuffer>()) == Mock.Of<IVsHierarchy>() &&

@@ -6,18 +6,34 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 {
-    internal abstract class RazorDocument : IEquatable<RazorDocument>
+    internal class HostDocument : IEquatable<HostDocument>
     {
-        public abstract string FilePath { get; }
+        public HostDocument(string filePath, string targetPath)
+        {
+            if (filePath == null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
 
-        public abstract string TargetPath { get; }
+            if (targetPath == null)
+            {
+                throw new ArgumentNullException(nameof(targetPath));
+            }
+
+            FilePath = filePath;
+            TargetPath = targetPath;
+        }
+
+        public string FilePath { get; }
+
+        public string TargetPath { get; }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj as RazorDocument);
+            return base.Equals(obj as DocumentSnapshot);
         }
 
-        public bool Equals(RazorDocument other)
+        public bool Equals(DocumentSnapshot other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -27,6 +43,11 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             return
                 FilePathComparer.Instance.Equals(FilePath, other.FilePath) &&
                 FilePathComparer.Instance.Equals(TargetPath, other.TargetPath);
+        }
+
+        public bool Equals(HostDocument other)
+        {
+            throw new NotImplementedException();
         }
 
         public override int GetHashCode()

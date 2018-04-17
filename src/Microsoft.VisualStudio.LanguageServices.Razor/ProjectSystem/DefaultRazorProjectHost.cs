@@ -186,14 +186,14 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
             return configurations.ToArray();
         }
 
-        private RazorDocument[] GetDocuments(IProjectSubscriptionUpdate update)
+        private DocumentSnapshot[] GetDocuments(IProjectSubscriptionUpdate update)
         {
             if (!update.CurrentState.TryGetValue(Rules.RazorGenerateWithTargetPath.SchemaName, out var rule))
             {
-                return Array.Empty<RazorDocument>();
+                return Array.Empty<DocumentSnapshot>();
             }
 
-            var documents = new List<RazorDocument>();
+            var documents = new List<DocumentSnapshot>();
             foreach (var kvp in rule.Items)
             {
                 if ( kvp.Value.TryGetValue(Rules.RazorGenerateWithTargetPath.TargetPathProperty, out var targetPath) &&

@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
     {
         public ProjectSnapshotWorkerQueueTest()
         {
-            HostProject1 = new HostProject("Test1.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<RazorDocument>());
-            HostProject2 = new HostProject("Test2.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<RazorDocument>());
+            HostProject1 = new HostProject("Test1.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<DocumentSnapshot>());
+            HostProject2 = new HostProject("Test2.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<DocumentSnapshot>());
 
             Workspace = TestWorkspace.Create();
 

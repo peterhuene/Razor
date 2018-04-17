@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 {
     internal class HostProject
     {
-        public HostProject(string projectFilePath, RazorConfiguration razorConfiguration, IEnumerable<RazorDocument> documents)
+        public HostProject(string projectFilePath, RazorConfiguration razorConfiguration, IEnumerable<DocumentSnapshot> documents)
         {
             if (projectFilePath == null)
             {
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem
 
         public RazorConfiguration Configuration { get; }
 
-        public IReadOnlyList<RazorDocument> Documents { get; }
+        public IReadOnlyList<DocumentSnapshot> Documents { get; }
 
         public string FilePath { get; }
     }

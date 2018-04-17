@@ -56,7 +56,7 @@ namespace Microsoft.CodeAnalysis.Remote.Razor
 
             public override RazorConfiguration Configuration { get; }
 
-            public override IReadOnlyList<RazorDocument> Documents { get; }
+            public override IReadOnlyList<DocumentSnapshot> Documents { get; }
 
             public override string FilePath { get; }
 

@@ -29,18 +29,18 @@ namespace Microsoft.CodeAnalysis.Razor
 
             WorkspaceProject = project;
 
-            HostProject_For_1_0 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<RazorDocument>());
-            HostProject_For_1_1 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<RazorDocument>());
-            HostProject_For_2_0 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_2_0, Array.Empty<RazorDocument>());
+            HostProject_For_1_0 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_1_0, Array.Empty<DocumentSnapshot>());
+            HostProject_For_1_1 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_1_1, Array.Empty<DocumentSnapshot>());
+            HostProject_For_2_0 = new HostProject("/TestPath/SomePath/Test.csproj", FallbackRazorConfiguration.MVC_2_0, Array.Empty<DocumentSnapshot>());
 
             HostProject_For_2_1 = new HostProject(
                 "/TestPath/SomePath/Test.csproj",
                 new ProjectSystemRazorConfiguration(RazorLanguageVersion.Version_2_1, "MVC-2.1", Array.Empty<RazorExtension>()),
-                Array.Empty<RazorDocument>());
+                Array.Empty<DocumentSnapshot>());
             HostProject_For_UnknownConfiguration = new HostProject(
                 "/TestPath/SomePath/Test.csproj",
                 new ProjectSystemRazorConfiguration(RazorLanguageVersion.Version_2_1, "Blazor-0.1", Array.Empty<RazorExtension>()),
-                Array.Empty<RazorDocument>());
+                Array.Empty<DocumentSnapshot>());
 
             Snapshot_For_1_0 = new DefaultProjectSnapshot(new ProjectSnapshotState(Workspace.Services, HostProject_For_1_0, WorkspaceProject));
             Snapshot_For_1_1 = new DefaultProjectSnapshot(new ProjectSnapshotState(Workspace.Services, HostProject_For_1_1, WorkspaceProject));

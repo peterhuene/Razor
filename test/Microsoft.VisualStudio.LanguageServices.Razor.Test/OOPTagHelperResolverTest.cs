@@ -19,11 +19,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
     {
         public OOPTagHelperResolverTest()
         {
-            HostProject_For_2_0 = new HostProject("Test.csproj", FallbackRazorConfiguration.MVC_2_0, Array.Empty<RazorDocument>());
+            HostProject_For_2_0 = new HostProject("Test.csproj", FallbackRazorConfiguration.MVC_2_0, Array.Empty<DocumentSnapshot>());
             HostProject_For_NonSerializableConfiguration = new HostProject(
                 "Test.csproj",
                 new ProjectSystemRazorConfiguration(RazorLanguageVersion.Version_2_1, "Blazor-0.1", Array.Empty<RazorExtension>()),
-                Array.Empty<RazorDocument>());
+                Array.Empty<DocumentSnapshot>());
 
             CustomFactories = new Lazy<IProjectEngineFactory, ICustomProjectEngineFactoryMetadata>[]
             {
