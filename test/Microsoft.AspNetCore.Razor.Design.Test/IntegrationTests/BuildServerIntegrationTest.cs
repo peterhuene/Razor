@@ -1,6 +1,8 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,9 +17,12 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
 {
     public class BuildServerIntegrationTest : MSBuildIntegrationTestBase, IClassFixture<BuildServerTestFixture>
     {
+        private BuildServerTestFixture _buildServer;
+
         public BuildServerIntegrationTest(BuildServerTestFixture buildServer)
             : base(buildServer)
         {
+            _buildServer = buildServer;
         }
 
         [Fact]
@@ -158,6 +163,32 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
 
             Assert.Equal(0, exitCode);
             Assert.Contains("shut down completed", output.ToString());
+        }
+
+        [Fact]
+        [InitializeTestProject("SimpleMvc")]
+        public void ServerStartup_WritesProcessAndPipeToFile()
+        {
+            // Arrange & Act
+            
+            // We expect the server to have started by now.
+
+            var processId = _buildServer.ProcessId;
+            var expectedFileName = $"rzc-{processId}";
+            var homeEnvVariable = PlatformInformation.IsWindows ? "USERPROFILE" : "HOME";
+            var path = Path.Combine(Environment.GetEnvironmentVariable(homeEnvVariable), ".dotnet", "pids", "build", expectedFileName);
+
+            // Assert
+            Assert.True(File.Exists(path));
+
+            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            using (var reader = new StreamReader(fileStream))
+            {
+                var lines = reader.ReadToEnd().Split(Environment.NewLine);
+                Assert.Equal(processId.ToString(), lines[0]);
+                Assert.Equal("rzc", lines[1]);
+                Assert.Equal(_buildServer.PipeName, lines[2]);
+            }
         }
     }
 }
